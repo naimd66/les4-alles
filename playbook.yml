@@ -1,0 +1,13 @@
+- name: Install web and db packages
+  hosts: all
+  become: true
+
+  vars_files:
+    - group_vars/web/main.yml
+    - group_vars/db/main.yml
+
+  roles:
+    - role: webserver
+      when: "'web' in group_names"
+    - role: dbserver
+      when: "'db' in group_names"

@@ -1,0 +1,6 @@
+- name: Install Apache and PHP packages
+  apt:
+    name: "{{ apache_packages }}"
+    state: present
+    update_cache: true
+  notify: restart apache

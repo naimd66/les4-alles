@@ -1,0 +1,4 @@
+mysql_packages:
+  - mysql-server
+mysql_user: "{{ db_user }}"
+mysql_password: "{{ db_password }}"

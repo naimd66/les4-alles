@@ -1,0 +1,23 @@
+- name: Install MySQL packages
+  apt:
+    name: "{{ mysql_packages }}"
+    state: present
+    update_cache: true
+  notify: restart mysql
+
+- name: Ensure MySQL is listening
+  service:
+    name: mysql
+    state: started
+    enabled: true
+
+- name: Create MySQL user
+  mysql_user:
+    name: "{{ mysql_user }}"
+    password: "{{ mysql_password }}"
+    priv: '*.*:ALL'
+    host: '%'
+    state: present
+  become: true
+  vars:
+    ansible_python_interpreter: /usr/bin/python3
